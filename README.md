@@ -1,59 +1,219 @@
-[![Hero Image](https://preline.co/hero-image-2.jpg)](https://preline.co)
+# ImmiCare - Immigration Compliance Made Simple
 
-<a href="https://preline.co"><img src="https://preline.co/preline-logo.svg" alt="Logo" width="200" height="auto"></a>
+A modern, responsive landing page for ImmiCare, an immigration compliance platform that helps employers manage their foreign workers' immigration needs efficiently and compliantly.
 
-Preline UI is an open-source set of prebuilt UI components based on the utility-first Tailwind CSS framework.
+## 🚀 Project Overview
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ImmiCare is a comprehensive immigration support platform designed for Canadian employers who hire foreign workers. The platform simplifies complex immigration processes, provides expert guidance, and ensures compliance with Canadian immigration regulations.
 
-## Why use Preline UI?
+### Key Features
 
-Based on the Tailwind CSS utility classes, Preline UI's prebuilt components and UI elements help you quickly design and customize responsive mobile-first websites with the components a website needs, including buttons, dropdowns, navigation bars, modals, and more.
+- **Employer Protection Plan** - $1/day per employee immigration helpdesk
+- **PR Transition Service** - Complete legal representation for high-potential workers
+- **RCIC Expert Support** - Licensed immigration consultants review all documents
+- **Automated Forms** - Pre-built templates for job letters, reference letters, and OINP forms
+- **Employee Portal** - Self-service portal for workers to manage their immigration journey
 
-## What's in the box?
+## 🎨 Design & Technology
 
-Components are grouped by visual usability criteria (components, navigation, forms, etc.) and styled directly on top of Tailwind CSS, making them easy to extend and customize. This is a lifesaver for developers looking to create a unique and eye-catching design system without the hassle of creating each component by hand.
+### Built with Tailwind CSS
 
-## Getting Started
+This project leverages **Tailwind CSS** for all styling, providing:
 
-### Quick Setup
+- **Utility-First Approach** - Rapid development with utility classes
+- **Responsive Design** - Mobile-first responsive breakpoints (`sm:`, `md:`, `lg:`)
+- **Dark Mode Support** - Custom four-theme system (Light, Dark, Cloudy, Paint)
+- **Custom Color Palette** - Brand-specific colors defined in Tailwind config
+- **Component Consistency** - Reusable utility patterns across all sections
 
-This guide will help you get started with Preline UI, including how to run, customize, update, and integrate your project!
+### Tailwind Configuration
 
-First, you need to make sure that you have a working <a href="https://tailwindcss.com/">Tailwind CSS</a> project installed and that you also have <a href="https://nodejs.org/en/">Node</a> and <a href="https://www.npmjs.com/">NPM</a> installed on your machine.
+```javascript
+tailwind.config = {
+    darkMode: 'class',
+    theme: {
+        extend: {
+            fontFamily: {
+                'sans': ['Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            },
+            colors: {
+                'brand-accent': '#A5B4FC', // indigo-300
+                'brand-text': '#020617',   // slate-950
+            }
+        }
+    }
+}
+```
 
-### Require via NPM
+### Theme System
 
-1. Install <code>preline</code> via npm
+The website features a unique four-theme toggle system:
 
-<pre><code>npm i preline</code></pre>
+1. **Cloudy Theme** (Default) - Mixed light/dark sections for optimal readability
+2. **Light Theme** - All sections with light backgrounds
+3. **Dark Theme** - All sections with dark backgrounds  
+4. **Paint Theme** - Purple-themed design with high contrast
 
-2. Import the Preline UI CSS Variants file <code>variants.css</code> into your Tailwind CSS file, ensuring it comes after the <code>tailwindcss</code> import.
+## 📱 Responsive Design
 
-<pre><code>@import "./node_modules/preline/variants.css";</code></pre>
+The layout is fully responsive across all device sizes:
 
-3. Include the JavaScript <code><script></code> that powers the interactive elements near the end of your <code>&lt;body&gt;</code> tag:
+- **Mobile** (< 768px) - Single column layouts, stacked navigation
+- **Tablet** (768px - 1024px) - Two-column grids, condensed spacing
+- **Desktop** (> 1024px) - Full multi-column layouts, expanded content
 
-<pre><code><script src="./node_modules/preline/dist/preline.js"></script></code></pre>
+### Key Responsive Features
 
-## Documentation
+- Adaptive testimonial carousel (1 card mobile, 2 tablet, 3 desktop)
+- Collapsible navigation menu on mobile
+- Responsive image galleries with proper aspect ratios
+- Flexible grid systems using Tailwind's grid utilities
 
-For full documentation of the Preline options, visit <a href="https://preline.co/">preline.co</a>. The site also contains information on the wide variety of <a href="https://preline.co/plugins.html">plugins</a> that are available for TailwindCSS projects.
+## 🎯 Sections Overview
 
-## Community
+### 1. Hero Section
+- Animated background mockups using placeholder images
+- Dual CTA buttons with distinct styling
+- Responsive typography scaling
 
-For help, discussion about best practices, or any other conversation that would benefit from being searchable use [GitHub Discussions](https://github.com/htmlstreamofficial/preline/discussions)
+### 2. Why Us (Features)
+- Three-column feature grid
+- Custom animations with intersection observer
+- Placeholder images for feature illustrations
 
-## License
+### 3. How It Works
+- Step-by-step process visualization
+- Numbered cards with hover effects
+- Progressive disclosure of information
 
-Preline UI is free for both personal and commercial projects, released under dual license terms [MIT](https://preline.co/docs/license.html) and [Preline UI Fair Use License](https://preline.co/docs/license.html) , and copyrighted 2024 by Preline Labs Ltd.
+### 4. Video Section
+- Modal video player with custom overlay
+- Responsive video container with 16:9 aspect ratio
+- Custom play button styling
 
-Preline UI Figma is free for both commercial and personal projects, learn more [here](https://preline.co/license.html).
-  
-All brand icons are trademarks of their respective owners. The use of these trademarks does not indicate endorsement of the trademark holder by Preline UI, nor vice versa.
+### 5. Comparison Section
+- Interactive tab switching (ImmiCare vs Traditional Way)
+- Dynamic content updates with smooth transitions
+- Conditional styling based on active tab
 
-## A product of Htmlstream
+### 6. Testimonials
+- Paginated testimonial carousel
+- Consistent card heights using flexbox
+- Navigation arrows with state management
 
-Preline UI is built and maintend by [Htmlstream](https://htmlstream.com) team. Over the last decade at Htmlstream, our journey has involved crafting UI Components and Templates. This process has allowed us to understand and explore a range of strategies for developing versatile UI designs that can adapt to a variety of needs.
+### 7. Pricing
+- Two-tier pricing structure
+- Feature lists with custom checkmark icons
+- Equal height cards using flexbox
 
-Share your thoughts about Preline on [Twitter](https://x.com/prelineUI) or leave supportive review on [ProductHunt](https://www.producthunt.com/products/preline-ui/reviews).
+### 8. Footer
+- Multi-column layout with responsive stacking
+- Social links and legal navigation
+- Consistent theming across all modes
+
+## 🛠 Technical Implementation
+
+### CSS Architecture
+
+- **Utility-First** - Tailwind utilities for 95% of styling
+- **Custom CSS** - Minimal custom styles for animations and theme overrides
+- **Component Classes** - Reusable patterns like `.animate-on-scroll`
+
+### JavaScript Features
+
+- **Theme Management** - localStorage persistence for user preferences
+- **Smooth Scrolling** - Intersection Observer API for scroll animations
+- **Modal Management** - Video modal with keyboard and click-outside closing
+- **Carousel Logic** - Testimonial pagination with responsive breakpoints
+
+### Performance Optimizations
+
+- **CDN Delivery** - Tailwind CSS loaded via CDN for fast initial load
+- **Lazy Loading** - Images loaded as needed
+- **Minimal JavaScript** - Vanilla JS for all interactions, no frameworks
+- **Optimized Images** - Placeholder.co for consistent, fast-loading images
+
+## 🎨 Design Patterns
+
+### Color System
+```css
+/* Brand Colors */
+--brand-accent: #A5B4FC;    /* Primary CTA buttons */
+--brand-text: #020617;      /* High contrast text */
+
+/* Theme-specific overrides */
+.light { /* Light theme styles */ }
+.dark { /* Dark theme styles */ }
+.cloudy { /* Mixed theme styles */ }
+.paint { /* Purple theme styles */ }
+```
+
+### Typography Scale
+- **Headings**: `text-4xl lg:text-5xl` for main headings
+- **Subheadings**: `text-xl lg:text-2xl` for section subheadings  
+- **Body**: `text-lg` for primary content
+- **Captions**: `text-sm` for metadata and labels
+
+### Spacing System
+- **Sections**: `py-20` for consistent vertical rhythm
+- **Containers**: `max-w-6xl mx-auto px-6` for content width
+- **Components**: `space-x-*` and `space-y-*` for consistent gaps
+
+## 🚀 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone [repository-url]
+   cd immicare
+   ```
+
+2. **Open in browser**
+   ```bash
+   open index.html
+   ```
+
+3. **Development**
+   - No build process required
+   - Tailwind CSS loaded via CDN
+   - All assets are self-contained
+
+## 📁 Project Structure
+
+```
+immicare/
+├── index.html          # Main landing page
+├── README.md          # Project documentation
+└── assets/            # (Future: local assets)
+```
+
+## 🎯 Browser Support
+
+- **Modern Browsers** - Chrome, Firefox, Safari, Edge (latest versions)
+- **Mobile Browsers** - iOS Safari, Chrome Mobile, Samsung Internet
+- **Features Used** - CSS Grid, Flexbox, CSS Custom Properties, Intersection Observer
+
+## 📈 Future Enhancements
+
+- [ ] Add build process with PostCSS for production optimization
+- [ ] Implement local asset management
+- [ ] Add more interactive animations
+- [ ] Integrate with backend API for form submissions
+- [ ] Add accessibility improvements (ARIA labels, keyboard navigation)
+
+## 🤝 Contributing
+
+This project uses a utility-first approach with Tailwind CSS. When contributing:
+
+1. Use Tailwind utilities whenever possible
+2. Add custom CSS only when necessary
+3. Maintain responsive design patterns
+4. Test across all four theme modes
+5. Ensure accessibility standards are met
+
+## 📄 License
+
+[Add your license information here]
+
+---
+
+**Built with ❤️ using Tailwind CSS**
