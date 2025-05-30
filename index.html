@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmiCare - Immigration Compliance Made Simple</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-accent': '#A5B4FC', // indigo-300
+                        'brand-text': '#020617', // slate-950
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom subtle animation - only 10px movement */
+        @keyframes subtleFadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animate-delay-100 { transition-delay: 0.1s; }
+        .animate-delay-200 { transition-delay: 0.2s; }
+        .animate-delay-300 { transition-delay: 0.3s; }
+        .animate-delay-400 { transition-delay: 0.4s; }
+        .animate-delay-500 { transition-delay: 0.5s; }
+        .animate-delay-600 { transition-delay: 0.6s; }
+        
+        /* Theme-specific styles */
+        .light section {
+            background-color: white !important;
+            color: black !important;
+        }
+        
+        .light footer {
+            background-color: white !important;
+            color: black !important;
+        }
+        
+        .light body {
+            background-color: white !important;
+            color: black !important;
+        }
+        
+        /* Light theme navbar */
+        .light #navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .light #logo-text {
+            color: #111827 !important;
+        }
+        
+        .light .nav-link {
+            color: #374151 !important;
+        }
+        
+        .light .nav-link:hover {
+            color: #111827 !important;
+        }
+        
+        .light #theme-toggle {
+            border-color: #6B7280 !important;
+            color: #111827 !important;
+        }
+        
+        .light #theme-toggle:hover {
+            border-color: #111827 !important;
+        }
+        
+        .light #cta-button {
+            border-color: #6B7280 !important;
+            color: #111827 !important;
+        }
+        
+        .light #cta-button:hover {
+            border-color: #111827 !important;
+            background-color: #F9FAFB !important;
+        }
+        
+        .dark section {
+            background-color: black !important;
+            color: white !important;
+        }
+        
+        .dark footer {
+            background-color: black !important;
+            color: white !important;
+        }
+        
+        .dark body {
+            background-color: black !important;
+            color: white !important;
+        }
+        
+        /* Dark theme navbar */
+        .dark #navbar {
+            background-color: rgba(0, 0, 0, 0.95) !important;
+        }
+        
+        .dark #cta-button {
+            color: white !important; /* Keep navbar button text white */
+        }
+        
+        /* Dark theme - main CTA buttons (not navbar) should have dark text */
+        .dark .bg-brand-accent {
+            background-color: #A5B4FC !important; /* indigo-300 */
+            color: #020617 !important; /* slate-950 */
+        }
+        
+        .dark .bg-brand-accent:hover {
+            background-color: #818CF8 !important; /* indigo-400 */
+            color: #020617 !important; /* slate-950 */
+        }
+        
+        /* Dark theme - ensure buttons with both classes have consistent text */
+        .dark .bg-brand-accent.text-brand-text,
+        .dark button.bg-brand-accent {
+            color: #020617 !important; /* slate-950 */
+        }
+        
+        .dark .text-brand-text {
+            color: #020617 !important; /* slate-950 for buttons */
+        }
+        
+        /* Cloudy theme uses original mixed styling */
+        .cloudy body {
+            background-color: black !important;
+            color: white !important;
+        }
+        
+        /* Cloudy theme - ensure comparison section text is white */
+        .cloudy section {
+            color: inherit;
+        }
+        
+        .cloudy section .text-gray-600,
+        .cloudy section .text-gray-700 {
+            color: #D1D5DB !important;
+        }
+        
+        .cloudy section h2,
+        .cloudy section h3,
+        .cloudy section p {
+            color: inherit;
+        }
+        
+        /* Cloudy theme - specific light sections */
+        .cloudy section#features,
+        .cloudy section#video,
+        .cloudy section#pricing {
+            background-color: white !important;
+            color: black !important;
+        }
+        
+        .cloudy section#features .text-gray-500,
+        .cloudy section#video .text-gray-500,
+        .cloudy section#pricing .text-gray-500 {
+            color: #6B7280 !important;
+        }
+        
+        /* Cloudy theme - comparison section should be light */
+        .cloudy section:has(.bg-gray-200) {
+            background-color: white !important;
+            color: black !important;
+        }
+        
+        /* Cloudy theme - high contrast text in comparison section */
+        .cloudy section:has(.bg-gray-200) h2,
+        .cloudy section:has(.bg-gray-200) h3,
+        .cloudy section:has(.bg-gray-200) p {
+            color: #111827 !important; /* Very dark gray for high contrast */
+        }
+        
+        .cloudy section:has(.bg-gray-200) .text-gray-600,
+        .cloudy section:has(.bg-gray-200) .text-gray-700 {
+            color: #374151 !important; /* Darker gray for better contrast */
+        }
+        
+        .cloudy section:has(.bg-gray-200) .text-brand-accent {
+            color: #4F46E5 !important; /* Darker indigo for better contrast */
+        }
+        
+        /* Global font weight override - no bold or semibold */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 500 !important; /* medium */
+        }
+        
+        .font-bold,
+        .font-semibold {
+            font-weight: 500 !important; /* medium */
+        }
+        
+        /* Specific overrides for any remaining bold elements */
+        strong, b {
+            font-weight: 500 !important; /* medium */
+        }
+        
+        /* High contrast text colors for light theme */
+        .light .text-brand-text {
+            color: #111827 !important; /* Very dark gray instead of slate-900 */
+        }
+        
+        .light .text-white {
+            color: #111827 !important; /* High contrast dark */
+        }
+        
+        .light .text-gray-300,
+        .light .text-gray-400,
+        .light .text-gray-500 {
+            color: #374151 !important; /* Darker gray for better contrast */
+        }
+        
+        .light .text-gray-600,
+        .light .text-gray-700 {
+            color: #1F2937 !important; /* Even darker for high contrast */
+        }
+        
+        /* Light theme button styles */
+        .light .bg-brand-accent {
+            background-color: #A5B4FC !important; /* indigo-300 */
+            color: #020617 !important; /* slate-950 */
+        }
+        
+        .light .bg-brand-accent:hover {
+            background-color: #818CF8 !important; /* indigo-400 */
+            color: #020617 !important; /* slate-950 */
+        }
+        
+        /* Light theme card backgrounds */
+        .light .bg-gray-800 {
+            background-color: #F9FAFB !important;
+            color: #111827 !important;
+            border: 1px solid #E5E7EB !important;
+        }
+        
+        /* Light theme borders */
+        .light .border-gray-200,
+        .light .border-gray-700 {
+            border-color: #D1D5DB !important;
+        }
+        
+        .dark .text-brand-text {
+            color: white !important;
+        }
+        
+        .dark .text-black {
+            color: white !important;
+        }
+        
+        .dark .text-gray-600,
+        .dark .text-gray-700 {
+            color: #D1D5DB !important;
+        }
+        
+        /* Paint theme - purple backgrounds with white text */
+        .paint section {
+            background-color: #7C3AED !important; /* Purple-600 */
+            color: white !important;
+        }
+        
+        .paint footer {
+            background-color: #7C3AED !important;
+            color: white !important;
+        }
+        
+        .paint body {
+            background-color: #7C3AED !important;
+            color: white !important;
+        }
+        
+        /* Paint theme - high contrast white text like dark mode */
+        .paint .text-gray-300,
+        .paint .text-gray-400,
+        .paint .text-gray-500,
+        .paint .text-gray-600,
+        .paint .text-gray-700 {
+            color: #D1D5DB !important; /* Light gray for better contrast */
+        }
+        
+        .paint .text-black {
+            color: white !important;
+        }
+        
+        .paint h1, .paint h2, .paint h3, .paint h4, .paint h5, .paint h6 {
+            color: white !important;
+        }
+        
+        .paint p {
+            color: #E5E7EB !important; /* Very light gray for readability */
+        }
+        
+        /* Paint theme navbar */
+        .paint #navbar {
+            background-color: rgba(124, 58, 237, 0.95) !important;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+        }
+        
+        .paint #logo-text {
+            color: white !important;
+        }
+        
+        .paint .nav-link {
+            color: #E5E7EB !important;
+        }
+        
+        .paint .nav-link:hover {
+            color: white !important;
+        }
+        
+        .paint #theme-toggle {
+            border-color: #E5E7EB !important;
+            color: white !important;
+        }
+        
+        .paint #theme-toggle:hover {
+            border-color: white !important;
+        }
+        
+        .paint #cta-button {
+            background-color: black !important;
+            border-color: black !important;
+            color: white !important;
+        }
+        
+        .paint #cta-button:hover {
+            background-color: #1F2937 !important;
+            border-color: #1F2937 !important;
+        }
+        
+        /* Paint theme button styles */
+        /*
+        .paint .bg-brand-accent {
+            background-color: #A5B4FC !important; 
+            color: #020617 !important; 
+        }
+        
+        .paint .bg-brand-accent:hover {
+            background-color: #818CF8 !important; 
+            color: #020617 !important; 
+        }
+        */
+        
+        /* Paint theme card backgrounds */
+        .paint .bg-gray-800 {
+            background-color: rgba(139, 92, 246, 0.3) !important; /* Purple-500 with opacity */
+            color: white !important;
+            border: 2px solid white !important;
+        }
+        
+        /* Paint theme borders */
+        .paint .border-gray-200,
+        .paint .border-gray-700 {
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+        
+        /* Paint theme pricing cards - colored backgrounds */
+        .paint #pricing .bg-white {
+            background-color: rgba(139, 92, 246, 0.4) !important; /* Darker purple for pricing cards */
+            color: white !important;
+            border: 2px solid white !important;
+        }
+        
+        /* Paint theme - ensure all pricing card text is white/light */
+        .paint #pricing h3,
+        .paint #pricing p,
+        .paint #pricing .text-gray-500,
+        .paint #pricing .text-gray-600,
+        .paint #pricing .text-gray-700 {
+            color: white !important;
+        }
+        
+        /* Paint theme - testimonial cards */
+        .paint .testimonial-card {
+            background-color: rgba(139, 92, 246, 0.3) !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        /* Paint theme - feature cards (Why Us section) */
+        .paint #features .rounded-2xl {
+            background-color: rgba(139, 92, 246, 0.3) !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            padding: 2rem !important;
+        }
+        
+        /* Paint theme - how it works step cards */
+        .paint #how-it-works .relative {
+            background-color: rgba(139, 92, 246, 0.3) !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 1rem !important;
+            padding: 1.5rem !important;
+        }
+        
+        /* Paint theme - video section container */
+        .paint #video .rounded-3xl {
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        }
+        
+        /* Paint theme - comparison section cards */
+        .paint .bg-gray-200 {
+            background-color: rgba(139, 92, 246, 0.4) !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        /* Paint theme - video section light gray background */
+        .paint #video .bg-gray-100 {
+            background-color: rgba(139, 92, 246, 0.3) !important;
+        }
+        
+        /* Paint theme - video indicator text */
+        .paint #video .text-gray-800 {
+            color: white !important;
+        }
+        
+        /* Paint theme - video indicator icon border and color */
+        .paint #video .border-gray-800 {
+            border-color: white !important;
+        }
+        
+        .paint #video svg.text-gray-800 {
+            color: white !important;
+        }
+        
+        /* Cloudy theme - ensure all light sections have high contrast text */
+        .cloudy section#features h2,
+        .cloudy section#features h3,
+        .cloudy section#features p,
+        .cloudy section#video h2,
+        .cloudy section#video h3,
+        .cloudy section#video p,
+        .cloudy section#pricing h2,
+        .cloudy section#pricing h3,
+        .cloudy section#pricing p {
+            color: #111827 !important;
+        }
+        
+        .cloudy section#features .text-gray-500,
+        .cloudy section#video .text-gray-500,
+        .cloudy section#pricing .text-gray-500 {
+            color: #374151 !important;
+        }
+        
+        /* Global brand accent button styling - consistent across all themes */
+        .bg-brand-accent {
+            background-color: #A5B4FC !important; /* indigo-300 */
+            color: #020617 !important; /* slate-950 */
+        }
+        
+        .bg-brand-accent:hover {
+            background-color: #818CF8 !important; /* indigo-400 */
+            color: #020617 !important; /* slate-950 */
+        }
+        
+        /* Ensure text-brand-text class uses slate-950 */
+        .text-brand-text {
+            color: #020617 !important; /* slate-950 */
+        }
+        
+        /* Paint theme - different CTA button styling */
+        .paint .bg-brand-accent {
+            background-color: #020617 !important; /* slate-950 */
+            color: white !important;
+        }
+        
+        .paint .bg-brand-accent:hover {
+            background-color: #0F172A !important; /* slate-900 */
+            color: white !important;
+        }
+        
+        .paint .text-brand-text {
+            color: white !important;
+        }
+        
+        /* Mobile responsive fixes */
+        @media (max-width: 768px) {
+            /* Hide all hero background images on mobile */
+            .hero-bg-image {
+                display: none !important;
+            }
+            
+            /* Why Us section - stack title and description vertically on mobile */
+            #features .flex.items-start.justify-between {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
+            
+            #features .max-w-2xl.ml-8 {
+                max-width: 100% !important;
+                margin-left: 0 !important;
+                margin-top: 1rem !important;
+            }
+            
+            /* Comparison section - hide image on mobile to prevent masking */
+            .comparison-image {
+                display: none !important;
+            }
+            
+            /* CTA section - fix image positioning on mobile */
+            #cta-section .absolute.bottom-0.right-0 {
+                position: relative !important;
+                bottom: auto !important;
+                right: auto !important;
+                margin-top: 2rem !important;
+            }
+            
+            /* CTA section - stack content vertically on mobile */
+            #cta-section .grid.grid-cols-1.lg\\:grid-cols-2 {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+        }
+        
+        /* Paint theme - comparison section cards */
+        .paint .bg-gray-200 {
+            background-color: rgba(139, 92, 246, 0.4) !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        /* Paint theme - active tab styling */
+        .paint .bg-white {
+            background-color: white !important;
+            color: #020617 !important; /* slate-950 for high contrast */
+        }
+        
+        /* Paint theme - ensure active tab text is always slate-950 */
+        .paint button.bg-white,
+        .paint .bg-white.text-gray-800 {
+            color: #020617 !important; /* slate-950 */
+        }
+        
+        /* High contrast active tab styling for all themes */
+        .bg-white.text-gray-800 {
+            color: #111827 !important; /* Very dark gray for high contrast */
+        }
+        
+        /* Dark theme active tab high contrast */
+        .dark .bg-white {
+            background-color: white !important;
+            color: #111827 !important; /* Very dark text on white background */
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Header/Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm" id="navbar">
+        <nav class="flex items-center justify-between px-6 py-4 lg:px-8">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2 animate-on-scroll animate-delay-100">
+                <div class="w-8 h-8 bg-brand-accent rounded-full"></div>
+                <span class="text-xl font-medium text-white" id="logo-text">ImmiCare</span>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <div class="hidden md:flex items-center space-x-8 animate-on-scroll animate-delay-200">
+                <a href="#features" class="text-gray-300 hover:text-white transition-colors nav-link">Features</a>
+                <a href="#how-it-works" class="text-gray-300 hover:text-white transition-colors nav-link">How It Works</a>
+                <a href="#video" class="text-gray-300 hover:text-white transition-colors nav-link">Product Tour</a>
+                <a href="#testimonials" class="text-gray-300 hover:text-white transition-colors nav-link">Testimonials</a>
+                <a href="#pricing" class="text-gray-300 hover:text-white transition-colors nav-link">Pricing</a>
+            </div>
+            
+            <!-- CTA Button -->
+            <div class="flex items-center space-x-4 animate-on-scroll animate-delay-300">
+                <!-- Theme Toggle -->
+                <div class="relative">
+                    <button id="theme-toggle" class="p-2 rounded-full border border-gray-400 hover:border-white transition-colors flex items-center" aria-label="Toggle theme">
+                        <!-- Sun icon (Cloudy theme) -->
+                        <svg id="sun-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                        </svg>
+                        
+                        <!-- Moon icon (Light theme) -->
+                        <svg id="moon-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        
+                        <!-- Cloud icon (Dark theme) -->
+                        <svg id="cloud-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"></path>
+                        </svg>
+                        
+                        <!-- Paint brush icon (Paint theme) -->
+                        <svg id="paint-icon" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M3 21v-4a4 4 0 1 1 4 4h-4" />
+                            <path d="M21 3a16 16 0 0 0 -12.8 10.2" />
+                            <path d="M21 3a16 16 0 0 1 -10.2 12.8" />
+                            <path d="M10.6 9a9 9 0 0 1 4.4 4.4" />
+                        </svg>
+                        
+                        <span id="theme-text" class="text-sm hidden">Cloudy</span>
+                    </button>
+                </div>
+                <button class="border border-gray-400 text-white px-6 py-2 rounded-full hover:border-white transition-colors" id="cta-button">
+                    Book a call
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute inset-0 pointer-events-none">
+            <!-- Left side mockup -->
+            <div class="hero-bg-image absolute -left-2 top-1/4 h-64 rounded-2xl overflow-hidden animate-on-scroll animate-delay-300">
+                <img src="img/hero-4.png" 
+                     alt="Task management interface" 
+                     class="w-full h-full object-cover rounded-2xl opacity-80">
+            </div>
+            
+            <!-- Right side mockups -->
+            <div class="hero-bg-image absolute -right-8 top-1/4 h-56 rounded-2xl overflow-hidden animate-on-scroll animate-delay-200">
+                <img src="img/hero-1.png" 
+                     alt="Analytics dashboard" 
+                     class="w-full h-full object-cover rounded-2xl opacity-80">
+            </div>
+            
+            <div class="hero-bg-image absolute right-44 -bottom-16 w-80 rounded-2xl overflow-hidden animate-on-scroll animate-delay-400">
+                <img src="img/hero-3.png" 
+                     alt="Schedule calendar interface" 
+                     class="w-full h-full object-cover rounded-2xl opacity-80">
+            </div>
+            
+            <!-- Bottom stats cards -->
+            <div class="hero-bg-image absolute -bottom-16 left-44 w-96  rounded-xl overflow-hidden animate-on-scroll animate-delay-500">
+                <img src="img/hero-2.png" 
+                     alt="Statistics dashboard" 
+                     class="w-full h-full object-cover rounded-xl opacity-80">
+            </div>
+        </div>
+        
+        <!-- Main content -->
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-6">
+            <!-- Tag -->
+            <div class="inline-flex items-center space-x-2 mb-6 animate-on-scroll animate-delay-100">
+                <svg class="w-4 h-4 text-brand-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-sm text-gray-300">Immigration support for your foreign workers</span>
+            </div>
+            
+            <!-- Main headline -->
+            <h1 class="text-4xl lg:text-6xl font-medium mb-4 leading-tight animate-on-scroll animate-delay-200">
+                Immigration Compliance.<br>
+                <span class="text-gray-300">Made Simple.</span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="text-lg lg:text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed animate-on-scroll animate-delay-300">
+                Everything your team needs to stay compliant, retain talent, and avoid costly mistakes.
+            </p>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-on-scroll animate-delay-400">
+                <button class="bg-brand-accent hover:bg-indigo-400 text-brand-text px-8 py-3 rounded-full font-medium transition-colors">
+                    Start Now for $1/day
+                </button>
+                <button class="border border-gray-400 hover:border-white text-white px-8 py-3 rounded-full font-medium transition-colors flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M8 5v10l7-5-7-5z"/>
+                    </svg>
+                    <span>Watch Demo</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="features" class="py-20 bg-white text-brand-text dark:bg-black dark:text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-12 flex items-start justify-between">
+                <div class="animate-on-scroll animate-delay-100">
+                    <span class="text-brand-accent font-medium text-lg">Why Us</span>
+                    <h2 class="text-4xl font-bold mt-2 mb-4">Why Employers<br>Choose ImmiCare</h2>
+                </div>
+                <div class="max-w-2xl ml-8 animate-on-scroll animate-delay-200">
+                    <p class="text-lg text-gray-500 dark:text-gray-300">Everything you need to stay compliant — without the paperwork headaches.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="rounded-2xl flex flex-col items-start animate-on-scroll animate-delay-300">
+                    <img src="img/why-1.png" alt="Choose assignee" class="mb-6 rounded-xl w-full object-cover border">
+                    <h3 class="font-semibold text-xl mb-2">Simple &amp; Intuitive</h3>
+                    <p class="text-gray-500 dark:text-gray-300">No training needed. ImmiCare is built for busy HR teams — get started in minutes and manage everything in one place.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="rounded-2xl flex flex-col items-start animate-on-scroll animate-delay-400">
+                    <img src="img/why-2.png" alt="Schedule" class="mb-6 rounded-xl w-full object-cover border">
+                    <h3 class="font-semibold text-xl mb-2">Guided by Licensed Experts</h3>
+                    <p class="text-gray-500 dark:text-gray-300">ImmiCare is powered by in-house RCICs, giving you expert immigration support and compliance assurance — all without extra overhead.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="rounded-2xl flex flex-col items-start animate-on-scroll animate-delay-500">
+                    <img src="img/why-3.png" alt="Utilization" class="mb-6 rounded-xl w-full object-cover border">
+                    <h3 class="font-semibold text-xl mb-2">Just $1 Per Day Per Employee</h3>
+                    <p class="text-gray-500 dark:text-gray-300">A complete compliance system that fits into any budget. No hidden fees. Cancel anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-black text-white">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <!-- Section Header -->
+            <div class="mb-16">
+                <span class="text-brand-accent font-medium text-lg animate-on-scroll animate-delay-100">How It Works</span>
+                <h2 class="text-4xl lg:text-5xl font-bold mt-4 animate-on-scroll animate-delay-200">Just 3 Simple Steps</h2>
+            </div>
+            
+            <!-- Steps Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center animate-on-scroll animate-delay-300">
+                    <!-- Card Mockup with Number -->
+                    <div class="relative w-2/3 max-w-xs mb-6">
+                        <img src="img/how-1.png" alt="Program setup interface" class="w-full object-cover rounded-2xl">
+                        <!-- Step Number Circle -->
+                        <div class="absolute -top-3 -left-3 w-12 h-12 bg-brand-accent text-black rounded-full flex items-center justify-center font-bold text-lg">
+                            1
+                        </div>
+                    </div>
+                    
+                    <!-- Step Title and Description -->
+                    <h3 class="text-xl font-semibold mb-3">Onboard in Minutes</h3>
+                    <p class="text-gray-400 text-center max-w-xs">
+                        Upload your employee's work permit and contract — that's it. We'll take care of the rest behind the scenes.
+                    </p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center animate-on-scroll animate-delay-400">
+                    <!-- Card Mockup with Number -->
+                    <div class="relative w-2/3 max-w-xs mb-6">
+                        <img src="img/how-2.png" alt="Employee portal interface" class="w-full object-cover rounded-2xl">
+                        <!-- Step Number Circle -->
+                        <div class="absolute -top-3 -left-3 w-12 h-12 bg-brand-accent text-black rounded-full flex items-center justify-center font-bold text-lg">
+                            2
+                        </div>
+                    </div>
+                    
+                    <!-- Step Title and Description -->
+                    <h3 class="text-xl font-semibold mb-3">Empower Employees</h3>
+                    <p class="text-gray-400 text-center max-w-xs">
+                        Invite employees to their own secure portal, where they can manage documents and receive personalized PR action plans — for free.
+                    </p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center animate-on-scroll animate-delay-500">
+                    <!-- Card Mockup with Number -->
+                    <div class="relative w-2/3 max-w-xs mb-6">
+                        <img src="img/how-3.png" alt="Compliance dashboard interface" class="w-full object-cover rounded-2xl">
+                        <!-- Step Number Circle -->
+                        <div class="absolute -top-3 -left-3 w-12 h-12 bg-brand-accent text-black rounded-full flex items-center justify-center font-bold text-lg">
+                            3
+                        </div>
+                    </div>
+                    
+                    <!-- Step Title and Description -->
+                    <h3 class="text-xl font-semibold mb-3">Stay Compliant, Effortlessly</h3>
+                    <p class="text-gray-400 text-center max-w-xs">
+                        Auto-generate key documents, monitor immigration status, and access licensed RCIC support — all in one dashboard.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-on-scroll animate-delay-600">
+                <button class="bg-brand-accent hover:bg-indigo-400 text-brand-text px-8 py-3 rounded-full font-medium transition-colors">
+                    Start Now
+                </button>
+                <button class="border border-gray-400 hover:border-white text-white px-8 py-3 rounded-full font-medium transition-colors">
+                    See Pricing
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="py-20 bg-white text-brand-text dark:bg-black dark:text-white relative">
+        <!-- Light Gray Background - From top to 3/4 height -->
+        <div class="absolute inset-0 bg-gray-100 dark:bg-gray-800" style="height: 75%;"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <!-- Video Indicator -->
+            <div class="flex items-center space-x-2 mb-6 animate-on-scroll animate-delay-100">
+                <div class="w-6 h-6 border-2 border-gray-800 dark:border-white rounded-full flex items-center justify-center">
+                    <svg class="w-3 h-3 text-gray-800 dark:text-white ml-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M8 5v10l7-5-7-5z"/>
+                    </svg>
+                </div>
+                <span class="text-gray-800 dark:text-white font-medium">Video • 3:23</span>
+            </div>
+            
+            <!-- Title -->
+            <h2 class="text-4xl lg:text-5xl font-bold mb-12 animate-on-scroll animate-delay-200">
+                Product Tour: Employee Onboarding
+            </h2>
+        </div>
+        
+        <!-- Full Width Video Container -->
+        <div class="relative w-full animate-on-scroll animate-delay-300">
+            <!-- Video Cover with Dashboard Mockup -->
+            <div class="relative max-w-6xl mx-auto px-6 py-8">
+                <div class="relative w-full h-96 lg:h-[500px] rounded-3xl overflow-hidden cursor-pointer group" id="video-trigger">
+                    <img src="img/video-1.png" 
+                         alt="Product Tour: Employee Onboarding" 
+                         class="w-full h-full object-cover">
+                    
+                    <!-- Dark Overlay -->
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+                    
+                    <!-- Play Button Overlay -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-48 h-28 bg-black rounded-xl flex items-center justify-center group-hover:bg-gray-800 transition-colors duration-300 shadow-2xl">
+                            <svg class="w-16 h-16 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M8 5v10l7-5-7-5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="py-20 bg-white text-brand-text dark:bg-black dark:text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="mb-12 animate-on-scroll animate-delay-100">
+                <span class="text-brand-accent font-medium text-lg">Cut Down Immigration Hassles</span>
+                <h2 class="text-4xl lg:text-5xl font-bold mt-4 mb-8">Reduce Time Spent on<br>Immigration Tasks</h2>
+                
+                <!-- Toggle Tabs -->
+                <div class="inline-flex items-center bg-gray-200 dark:bg-gray-700 rounded-full p-1">
+                    <button id="with-tab" class="px-6 py-3 rounded-full bg-white dark:bg-gray-600 text-gray-800 dark:text-white font-medium transition-colors shadow-sm">
+                        With ImmiCare
+                    </button>
+                    <button id="without-tab" class="px-6 py-3 rounded-full bg-transparent text-brand-text font-medium transition-colors">
+                        Traditional Way
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Comparison Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="animate-on-scroll animate-delay-200">
+                    <!-- With ImmiCare Content (Default) -->
+                    <div id="with-content" class="space-y-8">
+                        <h3 class="text-2xl font-semibold mb-6">Handle immigration paperwork in minutes — not days</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">AI-Pre-built, compliant templates for job & reference letters</p>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">Auto-filled OINP and immigration forms with verified employee data</p>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">RCIC-reviewed documents before submission—no risk, no guesswork</p>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">Cut down HR follow-ups by hours every month</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Without ImmiCare Content (Hidden by default) -->
+                    <div id="without-content" class="space-y-8 hidden">
+                        <h3 class="text-2xl font-semibold mb-6">Wasting hours on forms you're not trained to handle</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">Manually draft and verify every letter and form from scratch</p>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">Prone to errors, missed updates, and non-compliant submissions</p>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">HR caught between stressed employees and government complexity</p>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">Legal risks pile up—without a licensed expert in your corner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Image -->
+                <div class="comparison-image animate-on-scroll animate-delay-200">
+                    <div class="relative h-full">
+                        <img src="img/with-1.png" 
+                             alt="ImmiCare Dashboard - Projects & Tasks Management" 
+                             class=" bottom-0 right-0 w-full h-auto rounded-2xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-black text-white">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <!-- Section Header -->
+            <div class="mb-16">
+                <span class="text-brand-accent font-medium text-lg animate-on-scroll animate-delay-100">What Employers Say</span>
+                <h2 class="text-4xl lg:text-5xl font-bold mt-4 mb-6 animate-on-scroll animate-delay-200">Our Partner Kind Words</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto animate-on-scroll animate-delay-300">
+                    Here are some testimonials from our partners after using <span class="text-white font-medium">ImmiCare</span> to manage their business expenses.
+                </p>
+            </div>
+            
+            <!-- Testimonials Container -->
+            <div class="relative animate-on-scroll animate-delay-400">
+                <!-- Testimonials Grid -->
+                <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card bg-gray-800 rounded-2xl p-8 text-left min-h-[320px] flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4 text-white">It's a lifesaver!</h3>
+                        <p class="text-gray-300 mb-8 leading-relaxed flex-grow">
+                            "As a small business owner, I don't have time to deal with complicated immigration forms. ImmiCare saves me hours every week and keeps everything compliant."
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <img src="https://placehold.co/60x60/f3f4f6/6b7280?text=SM" 
+                                 alt="Sarah M." 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-white">Sarah M.</p>
+                                <p class="text-sm text-gray-400">Owner, Greenfield Café</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card bg-gray-800 rounded-2xl p-8 text-left min-h-[320px] flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Smooth and reliable</h3>
+                        <p class="text-gray-300 mb-8 leading-relaxed flex-grow">
+                            "ImmiCare made managing immigration requests easy and stress-free. I've been using their service for months, and it just works."
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <img src="https://placehold.co/60x60/f3f4f6/6b7280?text=DD" 
+                                 alt="David T." 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-white">David T.</p>
+                                <p class="text-sm text-gray-400">HR Manager, TechWorks Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card bg-gray-800 rounded-2xl p-8 text-left min-h-[320px] flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Trusted by local businesses</h3>
+                        <p class="text-gray-300 mb-8 leading-relaxed flex-grow">
+                            "I didn't know how to handle job letters and NOC codes. ImmiCare experts take care of everything fast and professionally."
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <img src="https://placehold.co/60x60/f3f4f6/6b7280?text=MR" 
+                                 alt="Maya R." 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-white">Maya R.</p>
+                                <p class="text-sm text-gray-400">Founder, Bloom Boutique</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-card bg-gray-800 rounded-2xl p-8 text-left min-h-[320px] flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Game changer for HR</h3>
+                        <p class="text-gray-300 mb-8 leading-relaxed flex-grow">
+                            "Before ImmiCare, immigration paperwork was a nightmare. Now our HR team can focus on what matters most - our people."
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <img src="https://placehold.co/60x60/f3f4f6/6b7280?text=JL" 
+                                 alt="James L." 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-white">James L.</p>
+                                <p class="text-sm text-gray-400">Director, Maple Manufacturing</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 5 -->
+                    <div class="testimonial-card bg-gray-800 rounded-2xl p-8 text-left min-h-[320px] flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Professional and efficient</h3>
+                        <p class="text-gray-300 mb-8 leading-relaxed flex-grow">
+                            "The RCIC support is invaluable. Having licensed experts review everything gives us confidence that we're doing things right."
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <img src="https://placehold.co/60x60/f3f4f6/6b7280?text=LK" 
+                                 alt="Lisa K." 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-white">Lisa K.</p>
+                                <p class="text-sm text-gray-400">CEO, Northern Logistics</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 6 -->
+                    <div class="testimonial-card bg-gray-800 rounded-2xl p-8 text-left min-h-[320px] flex flex-col">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Worth every penny</h3>
+                        <p class="text-gray-300 mb-8 leading-relaxed flex-grow">
+                            "At $1 per day per employee, ImmiCare pays for itself. The time savings alone make it an easy decision for any growing business."
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <img src="https://placehold.co/60x60/f3f4f6/6b7280?text=MC" 
+                                 alt="Michael C." 
+                                 class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-white">Michael C.</p>
+                                <p class="text-sm text-gray-400">Operations Manager, City Builders</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <div class="flex items-center justify-center space-x-4">
+                    <button id="prev-testimonial" class="w-12 h-12 border border-gray-600 hover:border-white rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors" aria-label="Previous testimonials">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <button id="next-testimonial" class="w-12 h-12 bg-brand-accent hover:bg-indigo-400 rounded-full flex items-center justify-center text-brand-text transition-colors" aria-label="Next testimonials">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden">
+                <!-- Close Button -->
+                <button id="close-modal" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors" aria-label="Close video">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                
+                <!-- Video Container -->
+                <div class="relative w-full h-0 pb-[56.25%]"> <!-- 16:9 aspect ratio -->
+                    <iframe id="video-iframe" 
+                            class="absolute inset-0 w-full h-full" 
+                            src="" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white text-brand-text dark:bg-black dark:text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 animate-on-scroll animate-delay-100">Ready to Get Started?</h2>
+                <p class="text-lg text-gray-500 dark:text-gray-400 animate-on-scroll animate-delay-200">Choose a plan that suits your business needs</p>
+            </div>
+            
+            <!-- Pricing Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Employer Protection Plan -->
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-8 animate-on-scroll animate-delay-300 flex flex-col">
+                    <!-- Plan Header -->
+                    <div class="flex items-center space-x-3 mb-6">
+                        <svg class="w-10 h-10 text-brand-accent" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <h3 class="text-2xl font-medium">Employer Protection Plan</h3>
+                    </div>
+                    
+                    <!-- Pricing -->
+                    <div class="mb-6">
+                        <div class="flex items-baseline space-x-2">
+                            <span class="text-4xl font-medium">$1/day</span>
+                            <span class="text-gray-500 dark:text-gray-400">per employee</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Description -->
+                    <p class="text-gray-600 dark:text-gray-300 mb-8">Outsourced immigration helpdesk for your team</p>
+                    
+                    <!-- Features List -->
+                    <div class="space-y-4 mb-8 flex-grow">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300">Job & reference letters aligned with IRCC/OINP</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300">OINP employer form completion</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300">NOC title guidance for PR eligibility</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300">Immigration education for workers</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300">NOC title guidance for PR eligibility</p>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Button -->
+                    <button class="w-full bg-brand-accent hover:bg-indigo-400 text-brand-text py-4 rounded-full font-medium transition-colors">
+                        Start with $1/day
+                    </button>
+                </div>
+                
+                <!-- PR Transition Service -->
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-8 animate-on-scroll animate-delay-400 flex flex-col">
+                    <!-- Plan Header -->
+                    <div class="flex items-center space-x-3 mb-6">
+                        <svg class="w-10 h-10 text-brand-accent" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        <h3 class="text-2xl font-medium">PR Transition Service</h3>
+                    </div>
+                    
+                    <!-- Pricing -->
+                    <div class="mb-6">
+                        <div class="flex items-baseline space-x-2">
+                            <span class="text-4xl font-medium">$250/mo</span>
+                            <span class="text-gray-500 dark:text-gray-400">per employee</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Description -->
+                    <p class="text-gray-600 dark:text-gray-300 mb-8">Complete legal representation for high-potential workers</p>
+                    
+                    <!-- Features List -->
+                    <div class="space-y-4 mb-8 flex-grow">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300">Personalized PR strategy (Express Entry, OINP)</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300">Full application submission by RCIC</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300">Monthly reports for employer</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700 dark:text-gray-300">1-on-1 employee support</p>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Button -->
+                    <button class="w-full bg-brand-accent hover:bg-indigo-400 text-brand-text py-4 rounded-full font-medium transition-colors">
+                        Request Full Support
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta-section" class="py-20 bg-black text-white relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="animate-on-scroll animate-delay-100">
+                    <!-- Tag -->
+                    <span class="text-brand-accent font-medium text-lg mb-4 block">Support Your International Talent</span>
+                    
+                    <!-- Main Heading -->
+                    <h2 class="text-4xl lg:text-5xl font-medium mb-6 leading-tight">
+                        Start Supporting Your<br>
+                        Team Today
+                    </h2>
+                    
+                    <!-- Description -->
+                    <p class="text-lg text-gray-400 mb-8 leading-relaxed">
+                        Immigration done right — fast, compliant, and affordable for local businesses.
+                    </p>
+                    
+                    <!-- CTA Button -->
+                    <button class="bg-brand-accent hover:bg-indigo-400 text-brand-text px-8 py-4 rounded-full font-medium transition-colors">
+                        Get Started for $1/day
+                    </button>
+                </div>
+                
+                <!-- Right Image -->
+                <div class="animate-on-scroll animate-delay-200 absolute bottom-0 right-0">
+                    <div class="relative w-full">
+                        <img src="img/cta-1.png" 
+                             alt="ImmiCare Dashboard - Projects & Tasks Management" 
+                             class="w-[600px] rounded-tl-2xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Main Footer Content -->
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2 mb-6 lg:mb-0 animate-on-scroll animate-delay-100">
+                    <div class="w-8 h-8 bg-brand-accent rounded-full"></div>
+                    <span class="text-xl font-medium text-brand-text">ImmiCare</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="flex flex-wrap items-center space-x-8 animate-on-scroll animate-delay-200">
+
+                    <a href="#about" class="text-gray-600 hover:text-brand-text transition-colors">
+                        About Us
+                    </a>
+                    <a href="#blog" class="text-gray-600 hover:text-brand-text transition-colors">
+                        Blog
+                    </a>
+                    <a href="https://linkedin.com/company/immicare" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-brand-text transition-colors">
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Bottom Footer -->
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center pt-8 border-t border-gray-200">
+                <!-- Legal Links -->
+                <div class="flex flex-wrap items-center space-x-6 mb-4 lg:mb-0 animate-on-scroll animate-delay-300">
+                    <a href="#privacy" class="text-gray-600 hover:text-brand-text transition-colors">
+                        Privacy Policy
+                    </a>
+                    <span class="text-gray-400">|</span>
+                    <a href="#terms" class="text-gray-600 hover:text-brand-text transition-colors">
+                        Terms & Conditions
+                    </a>
+                    <span class="text-gray-400">|</span>
+                    <a href="#cookies" class="text-gray-600 hover:text-brand-text transition-colors">
+                        Cookie Policy
+                    </a>
+                </div>
+                
+                <!-- Copyright -->
+                <div class="animate-on-scroll animate-delay-400">
+                    <p class="text-gray-600">© ImmiCare</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script>
+    // Four-theme toggle functionality (Light, Dark, Cloudy, Paint)
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const cloudIcon = document.getElementById('cloud-icon');
+    const paintIcon = document.getElementById('paint-icon');
+    const themeText = document.getElementById('theme-text');
+    
+    // Theme states: 'light', 'dark', 'cloudy', 'paint'
+    let currentTheme = localStorage.getItem('theme') || 'cloudy';
+    
+    // Apply theme function
+    function applyTheme(theme) {
+        // Remove all theme classes first
+        document.documentElement.classList.remove('dark', 'light', 'cloudy', 'paint');
+        
+        // Hide all icons
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.add('hidden');
+        cloudIcon.classList.add('hidden');
+        paintIcon.classList.add('hidden');
+        
+        // Get footer element
+        const footer = document.querySelector('footer');
+        
+        if (theme === 'light') {
+            // Light theme: all sections light
+            document.documentElement.classList.add('light');
+            document.body.className = 'bg-white text-black';
+            
+            // Show moon icon (next theme will be dark)
+            moonIcon.classList.remove('hidden');
+            themeText.textContent = 'Light';
+            
+            // Override all sections to be light
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('bg-black', 'text-white');
+                section.classList.add('bg-white', 'text-black');
+            });
+            
+            // Handle footer for light theme
+            if (footer) {
+                footer.classList.remove('bg-black', 'bg-purple-600', 'text-white');
+                footer.classList.add('bg-white', 'text-black');
+            }
+            
+        } else if (theme === 'dark') {
+            // Dark theme: all sections dark
+            document.documentElement.classList.add('dark');
+            document.body.className = 'bg-black text-white';
+            
+            // Show paint icon (next theme will be paint)
+            paintIcon.classList.remove('hidden');
+            themeText.textContent = 'Dark';
+            
+            // Override all sections to be dark
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('bg-white', 'text-black');
+                section.classList.add('bg-black', 'text-white');
+            });
+            
+            // Handle footer for dark theme
+            if (footer) {
+                footer.classList.remove('bg-white', 'bg-purple-600', 'text-black');
+                footer.classList.add('bg-black', 'text-white');
+            }
+            
+        } else if (theme === 'paint') {
+            // Paint theme: all sections purple
+            document.documentElement.classList.add('paint');
+            document.body.className = 'bg-purple-600 text-white';
+            
+            // Show cloud icon (next theme will be cloudy)
+            cloudIcon.classList.remove('hidden');
+            themeText.textContent = 'Paint';
+            
+            // Override all sections to be purple
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('bg-black', 'bg-white', 'text-black', 'text-white');
+                section.classList.add('bg-purple-600', 'text-white');
+            });
+            
+            // Handle footer for paint theme
+            if (footer) {
+                footer.classList.remove('bg-white', 'bg-black', 'text-black');
+                footer.classList.add('bg-purple-600', 'text-white');
+            }
+            
+        } else {
+            // Cloudy theme: mixed (original design)
+            document.documentElement.classList.add('cloudy');
+            document.body.className = 'bg-black text-white';
+            
+            // Show sun icon (next theme will be light)
+            sunIcon.classList.remove('hidden');
+            themeText.textContent = 'Cloudy';
+            
+            // Restore original mixed theme
+            restoreOriginalTheme();
+        }
+    }
+    
+    // Restore original mixed theme
+    function restoreOriginalTheme() {
+        // Reset body
+        document.body.className = 'bg-black text-white';
+        
+        // Set specific sections back to their original themes
+        const sections = document.querySelectorAll('section');
+        sections.forEach((section, index) => {
+            // Remove all theme classes first
+            section.classList.remove('bg-black', 'bg-white', 'bg-purple-600', 'text-black', 'text-white');
+            
+            // Apply original theme based on section
+            if (section.id === 'features' || 
+                section.id === 'video' || 
+                section.id === 'pricing' ||
+                section.classList.contains('py-20') && section.querySelector('.bg-gray-200')) { // Comparison section
+                // Light sections
+                section.classList.add('bg-white', 'text-black');
+            } else {
+                // Dark sections (hero, how-it-works, testimonials, cta)
+                section.classList.add('bg-black', 'text-white');
+            }
+        });
+        
+        // Handle comparison section specifically (it has unique structure)
+        const comparisonSection = document.querySelector('section .bg-gray-200');
+        if (comparisonSection && comparisonSection.closest('section')) {
+            const section = comparisonSection.closest('section');
+            section.classList.remove('bg-black', 'text-white');
+            section.classList.add('bg-white', 'text-black');
+        }
+        
+        // Handle footer separately - in cloudy mode, footer should be light
+        const footer = document.querySelector('footer');
+        if (footer) {
+            footer.classList.remove('bg-black', 'bg-purple-600', 'text-white');
+            footer.classList.add('bg-white', 'text-black');
+        }
+    }
+    
+    // Initialize theme
+    applyTheme(currentTheme);
+    
+    // Theme toggle click handler
+    themeToggle.addEventListener('click', function() {
+        // Cycle through themes: cloudy -> light -> dark -> paint -> cloudy
+        if (currentTheme === 'cloudy') {
+            currentTheme = 'light';
+        } else if (currentTheme === 'light') {
+            currentTheme = 'dark';
+        } else if (currentTheme === 'dark') {
+            currentTheme = 'paint';
+        } else {
+            currentTheme = 'cloudy';
+        }
+        
+        // Apply new theme
+        applyTheme(currentTheme);
+        
+        // Save theme preference
+        localStorage.setItem('theme', currentTheme);
+    });
+    
+    // Video modal functionality
+    const videoTrigger = document.getElementById('video-trigger');
+    const videoModal = document.getElementById('video-modal');
+    const closeModal = document.getElementById('close-modal');
+    const videoIframe = document.getElementById('video-iframe');
+    
+    // Replace with your actual video URL
+    const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+    
+    videoTrigger.addEventListener('click', function() {
+        videoModal.classList.remove('hidden');
+        videoIframe.src = videoUrl;
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+    
+    closeModal.addEventListener('click', function() {
+        videoModal.classList.add('hidden');
+        videoIframe.src = ''; // Stop video playback
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+    
+    // Close modal when clicking outside the video
+    videoModal.addEventListener('click', function(e) {
+        if (e.target === videoModal) {
+            videoModal.classList.add('hidden');
+            videoIframe.src = '';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+            videoModal.classList.add('hidden');
+            videoIframe.src = '';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Comparison section tab functionality
+    const withTab = document.getElementById('with-tab');
+    const withoutTab = document.getElementById('without-tab');
+    const withContent = document.getElementById('with-content');
+    const withoutContent = document.getElementById('without-content');
+    const withImage = document.getElementById('with-image');
+    const withoutImage = document.getElementById('without-image');
+    
+    withTab.addEventListener('click', function() {
+        // Update tab styles
+        withTab.classList.remove('bg-transparent');
+        withTab.classList.add('bg-white', 'dark:bg-gray-600', 'text-gray-800', 'dark:text-white', 'shadow-sm');
+        withoutTab.classList.remove('bg-white', 'dark:bg-gray-600', 'text-gray-800', 'dark:text-white', 'shadow-sm');
+        withoutTab.classList.add('bg-transparent', 'text-brand-text');
+        
+        // Update content visibility
+        withContent.classList.remove('hidden');
+        withoutContent.classList.add('hidden');
+        withImage.classList.remove('hidden');
+        withoutImage.classList.add('hidden');
+    });
+    
+    withoutTab.addEventListener('click', function() {
+        // Update tab styles
+        withoutTab.classList.remove('bg-transparent');
+        withoutTab.classList.add('bg-white', 'dark:bg-gray-600', 'text-gray-800', 'dark:text-white', 'shadow-sm');
+        withTab.classList.remove('bg-white', 'dark:bg-gray-600', 'text-gray-800', 'dark:text-white', 'shadow-sm');
+        withTab.classList.add('bg-transparent', 'text-brand-text');
+        
+        // Update content visibility
+        withoutContent.classList.remove('hidden');
+        withContent.classList.add('hidden');
+        withoutImage.classList.remove('hidden');
+        withImage.classList.add('hidden');
+    });
+    
+    // Scroll-triggered animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all elements with animate-on-scroll class
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Testimonials navigation functionality
+    const testimonialsContainer = document.getElementById('testimonials-container');
+    const prevButton = document.getElementById('prev-testimonial');
+    const nextButton = document.getElementById('next-testimonial');
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    
+    let currentPage = 0;
+    const cardsPerPage = 3; // Show 3 testimonials at a time on desktop
+    const totalPages = Math.ceil(testimonialCards.length / cardsPerPage);
+    
+    function updateTestimonialDisplay() {
+        testimonialCards.forEach((card, index) => {
+            const startIndex = currentPage * cardsPerPage;
+            const endIndex = startIndex + cardsPerPage;
+            
+            if (index >= startIndex && index < endIndex) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        // Update button states
+        prevButton.disabled = currentPage === 0;
+        nextButton.disabled = currentPage === totalPages - 1;
+        
+        // Update button opacity based on state
+        if (currentPage === 0) {
+            prevButton.classList.add('opacity-50', 'cursor-not-allowed');
+        } else {
+            prevButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+        
+        if (currentPage === totalPages - 1) {
+            nextButton.classList.add('opacity-50', 'cursor-not-allowed');
+        } else {
+            nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+    }
+    
+    // Initialize testimonial display
+    updateTestimonialDisplay();
+    
+    // Previous button click handler
+    prevButton.addEventListener('click', function() {
+        if (currentPage > 0) {
+            currentPage--;
+            updateTestimonialDisplay();
+        }
+    });
+    
+    // Next button click handler
+    nextButton.addEventListener('click', function() {
+        if (currentPage < totalPages - 1) {
+            currentPage++;
+            updateTestimonialDisplay();
+        }
+    });
+    
+    // Handle responsive behavior for testimonials
+    function handleTestimonialResize() {
+        const screenWidth = window.innerWidth;
+        let newCardsPerPage;
+        
+        if (screenWidth < 768) {
+            newCardsPerPage = 1; // Mobile: 1 card
+        } else if (screenWidth < 1024) {
+            newCardsPerPage = 2; // Tablet: 2 cards
+        } else {
+            newCardsPerPage = 3; // Desktop: 3 cards
+        }
+        
+        if (newCardsPerPage !== cardsPerPage) {
+            cardsPerPage = newCardsPerPage;
+            currentPage = 0; // Reset to first page
+            updateTestimonialDisplay();
+        }
+    }
+    
+    // Listen for window resize
+    window.addEventListener('resize', handleTestimonialResize);
+    
+    // Initial call
+    handleTestimonialResize();
+</script>
+</html>
