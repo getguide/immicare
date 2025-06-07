@@ -22,7 +22,7 @@ Resources:
       Environment:
         Variables:
           WEBHOOK_URL: !Ref AirtableWebhookUrl
-          S3_BUCKET: !Ref S3BucketName
+          S3_BUCKET_NAME: !Ref S3BucketName
       Policies:
         - S3CrudPolicy:
             BucketName: !Ref S3BucketName
