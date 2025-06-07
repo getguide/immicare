@@ -5,6 +5,7 @@ Parameters:
   S3BucketName:
     Type: String
     Description: Name of the existing S3 bucket to store updates
+    Default: immiwatch-lambda-tracker
   AirtableWebhookUrl:
     Type: String
     Description: Airtable webhook URL for notifications
