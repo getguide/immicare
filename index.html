@@ -610,43 +610,47 @@
             </div>
             
             <!-- CTA Button -->
-            <div class="flex items-center space-x-4 animate-on-scroll animate-delay-300">
-                <!-- Theme Toggle -->
-                <div class="relative">
-                    <button id="theme-toggle" class="p-2 rounded-full border border-gray-400 hover:border-white transition-colors flex items-center" aria-label="Toggle theme">
-                        <!-- Sun icon (Cloudy theme) -->
-                        <svg id="sun-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
-                        </svg>
-                        
-                        <!-- Moon icon (Light theme) -->
-                        <svg id="moon-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                        </svg>
-                        
-                        <!-- Cloud icon (Dark theme) -->
-                        <svg id="cloud-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"></path>
-                        </svg>
-                        
-                        <!-- Paint brush icon (Paint theme) -->
-                        <svg id="paint-icon" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M3 21v-4a4 4 0 1 1 4 4h-4" />
-                            <path d="M21 3a16 16 0 0 0 -12.8 10.2" />
-                            <path d="M21 3a16 16 0 0 1 -10.2 12.8" />
-                            <path d="M10.6 9a9 9 0 0 1 4.4 4.4" />
-                        </svg>
-                        
-                        <span id="theme-text" class="text-sm hidden">Cloudy</span>
-                    </button>
-                </div>
-                <button class="border border-gray-400 text-white px-6 py-2 rounded-full hover:border-white transition-colors" id="cta-button">
-                    Book a call
-                </button>
-            </div>
-        </nav>
-    </header>
+<div class="flex items-center space-x-4 animate-on-scroll animate-delay-300">
+    <!-- Theme Toggle -->
+    <div class="relative">
+        <button id="theme-toggle" class="p-2 rounded-full border border-gray-400 hover:border-white transition-colors flex items-center" aria-label="Toggle theme">
+            <!-- Sun icon (Cloudy theme) -->
+            <svg id="sun-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+            </svg>
+
+            <!-- Moon icon (Light theme) -->
+            <svg id="moon-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+
+            <!-- Cloud icon (Dark theme) -->
+            <svg id="cloud-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"></path>
+            </svg>
+
+            <!-- Paint brush icon (Paint theme) -->
+            <svg id="paint-icon" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3 21v-4a4 4 0 1 1 4 4h-4" />
+                <path d="M21 3a16 16 0 0 0 -12.8 10.2" />
+                <path d="M21 3a16 16 0 0 1 -10.2 12.8" />
+                <path d="M10.6 9a9 9 0 0 1 4.4 4.4" />
+            </svg>
+
+            <span id="theme-text" class="text-sm hidden">Cloudy</span>
+        </button>
+    </div>
+
+    <!-- Book a call button with link -->
+    <a href="https://immi.care/book-call">
+        <button class="border border-gray-400 text-white px-6 py-2 rounded-full hover:border-white transition-colors" id="cta-button">
+            Book a call
+        </button>
+    </a>
+</div>
+</nav>
+</header>
 
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
