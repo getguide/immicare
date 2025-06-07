@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  S3BucketName:
+    Type: String
+    Description: Name of the existing S3 bucket to store updates
+  AirtableWebhookUrl:
+    Type: String
+    Description: Airtable webhook URL for notifications
+    NoEcho: true
+
+Resources:
+  DrawCheckerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: immiwatch/src/functions/scraper/
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.12
+      Timeout: 30
+      MemorySize: 128
+      Environment:
+        Variables:
+          WEBHOOK_URL: !Ref AirtableWebhookUrl
+          S3_BUCKET: !Ref S3BucketName
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref S3BucketName
+      Events:
+        DrawCheckerSchedule:
+          Type: Schedule
+          Properties:
+            Schedule: rate(15 minutes)
+            Enabled: true
+
+Outputs:
+  DrawCheckerFunction:
+    Description: "Draw Checker Lambda Function ARN"
+    Value: !GetAtt DrawCheckerFunction.Arn
+  DrawCheckerFunctionRole:
+    Description: "Implicit IAM Role created for the draw checker function"
+    Value: !GetAtt DrawCheckerFunctionRole.Arn 
