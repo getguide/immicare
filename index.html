@@ -13,9 +13,6 @@
     <meta property="og:image" content="https://immicare.ca/img/hero-1.png">
     <title>ImmiCare - Immigration Compliance Made Simple</title>
     <link rel="icon" type="image/png" href="https://immicare.ca/img/logo-favicon.png">
-    <!-- Your font and Tailwind links here -->
-</head>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1569,6 +1566,9 @@
     
     // Theme toggle click handler
     themeToggle.addEventListener('click', function() {
+        // Add aria-label for screen readers
+        themeToggle.setAttribute('aria-label', `Switch to ${getNextTheme(currentTheme)} theme`);
+        
         // Cycle through themes: cloudy -> light -> dark -> paint -> cloudy
         if (currentTheme === 'cloudy') {
             currentTheme = 'light';
@@ -1580,12 +1580,20 @@
             currentTheme = 'cloudy';
         }
         
-        // Apply new theme
-        applyTheme(currentTheme);
-        
-        // Save theme preference
-        localStorage.setItem('theme', currentTheme);
+        // Batch DOM updates
+        requestAnimationFrame(() => {
+            applyTheme(currentTheme);
+            // Save theme preference
+            localStorage.setItem('theme', currentTheme);
+        });
     });
+    
+    // Helper function to get next theme name
+    function getNextTheme(currentTheme) {
+        const themes = ['cloudy', 'light', 'dark', 'paint'];
+        const currentIndex = themes.indexOf(currentTheme);
+        return themes[(currentIndex + 1) % themes.length];
+    }
     
     // Video modal functionality
     const videoTrigger = document.getElementById('video-trigger');
@@ -1593,12 +1601,13 @@
     const closeModal = document.getElementById('close-modal');
     const videoIframe = document.getElementById('video-iframe');
     
-    // Replace with your actual video URL
-    const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+    // TODO: Replace with your actual video URL
+    const videoUrl = 'YOUR_VIDEO_URL_HERE';
     
     videoTrigger.addEventListener('click', function() {
         videoModal.classList.remove('hidden');
         videoIframe.src = videoUrl;
+        videoIframe.setAttribute('aria-label', 'Video player');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
     });
     
@@ -1754,17 +1763,18 @@
             newCardsPerPage = 3; // Desktop: 3 cards
         }
         
-        if (newCardsPerPage !== cardsPerPage) {
+        // Update cards per page if changed
+        if (cardsPerPage !== newCardsPerPage) {
             cardsPerPage = newCardsPerPage;
             currentPage = 0; // Reset to first page
             updateTestimonialDisplay();
         }
     }
     
-    // Listen for window resize
+    // Add resize listener
     window.addEventListener('resize', handleTestimonialResize);
     
-    // Initial call
+    // Initial call to set correct number of cards
     handleTestimonialResize();
 </script>
 </html>
