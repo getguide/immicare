@@ -1,53 +1,58 @@
-# Immiwatch Scraper
+# Immicare
 
-A Lambda function that monitors the IRCC Program Delivery Updates page and notifies about new updates via Airtable webhook.
+A comprehensive immigration assistance platform designed to help immigrants navigate their journey in Canada.
+
+## Overview
+
+Immicare is a modern web application that provides tools and resources to help immigrants understand and manage their immigration process. The platform offers a user-friendly interface to access important immigration information and track application progress.
 
 ## Features
 
-- Scrapes the IRCC Program Delivery Updates page every 15 minutes
-- Stores updates in S3 for historical tracking
-- Sends notifications to Airtable via webhook when new updates are found
-- Automated deployment using GitHub Actions
+- Modern, responsive web interface
+- Real-time immigration updates and notifications
+- User-friendly dashboard for tracking immigration progress
+- Comprehensive resource library
+- Secure user authentication and data management
 
-## Prerequisites
+## Tech Stack
 
-- AWS Account with appropriate permissions
-- Airtable webhook URL
-- Python 3.9+
-- AWS SAM CLI
-- GitHub repository
+- Frontend: HTML5, CSS3, JavaScript/TypeScript
+- Build Tools: Webpack
+- Package Management: npm/yarn
+- Development Tools: VS Code configuration included
 
-## Setup
+## Getting Started
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/getguide/immiwatch.git
-   cd immiwatch
+   git clone https://github.com/getguide/immicare.git
+   cd immicare
    ```
 
 2. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   npm install
    ```
 
-3. Set up GitHub Secrets:
-   - `AWS_ACCESS_KEY_ID`: Your AWS access key
-   - `AWS_SECRET_ACCESS_KEY`: Your AWS secret key
-   - `AWS_REGION`: Your AWS region (e.g., us-east-1)
-   - `S3_BUCKET_NAME`: Name for the S3 bucket
-   - `AIRTABLE_WEBHOOK_URL`: Your Airtable webhook URL
-
-4. Deploy:
+3. Start the development server:
    ```bash
-   sam build
-   sam deploy --guided --parameter-overrides S3BucketName=${{ secrets.S3_BUCKET_NAME }} AirtableWebhookUrl=${{ secrets.AIRTABLE_WEBHOOK_URL }}
+   npm run dev
    ```
+
+## Project Structure
+
+- `/src` - Source code
+- `/dist` - Distribution files
+- `/img` - Image assets
+- `/immicare` - Core application code
+- `webpack.config.js` - Webpack configuration
+- `package.json` - Project dependencies and scripts
 
 ## Development
 
-- The main Lambda function is in `src/functions/scraper/lambda_function.py`
-- Tests are in the `tests/` directory
-- Infrastructure is defined in `template.yaml`
+- The main application code is in the `/immicare` directory
+- Frontend assets are managed through webpack
+- VS Code settings are included for consistent development experience
 
 ## Contributing
 
@@ -60,3 +65,7 @@ A Lambda function that monitors the IRCC Program Delivery Updates page and notif
 ## License
 
 MIT
+
+## Support
+
+For support and questions, please open an issue in the GitHub repository.
