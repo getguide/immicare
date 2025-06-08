@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://immicare.ca">
     <meta property="og:image" content="https://immicare.ca/img/hero-1.png">
     <title>ImmiCare - Immigration Compliance Made Simple</title>
-    <link rel="icon" type="image/png" href="/img/logo-favicon.png">
+    <link rel="icon" type="image/png" href="https://immicare.ca/img/logo-favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -37,24 +37,6 @@
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
-        }
-        
-        /* Logo floating animation */
-        @keyframes logoFloat {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-        
-        .logo-float {
-            animation: logoFloat 3s ease-in-out infinite !important;
-            display: inline-block !important;
         }
         
         /* Custom subtle animation - only 10px movement */
@@ -538,38 +520,40 @@
         
         /* Mobile responsive fixes */
         @media (max-width: 768px) {
-            /* Hero section mobile fixes */
+            /* Hide all hero background images on mobile */
             .hero-bg-image {
+                display: none !important;
+            }
+            
+            /* Why Us section - stack title and description vertically on mobile */
+            #features .flex.items-start.justify-between {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
+            
+            #features .max-w-2xl.ml-8 {
+                max-width: 100% !important;
+                margin-left: 0 !important;
+                margin-top: 1rem !important;
+            }
+            
+            /* Comparison section - hide image on mobile to prevent masking */
+            .comparison-image {
+                display: none !important;
+            }
+            
+            /* CTA section - fix image positioning on mobile */
+            #cta-section .absolute.bottom-0.right-0 {
                 position: relative !important;
-                width: 100% !important;
-                max-width: 300px !important;
-                margin: 1rem auto !important;
-                left: auto !important;
-                right: auto !important;
-                top: auto !important;
                 bottom: auto !important;
-                display: block !important;
+                right: auto !important;
+                margin-top: 2rem !important;
             }
-
-            /* Stack hero images vertically on mobile */
-            .hero-bg-image:nth-child(1) { margin-top: 2rem !important; }
-            .hero-bg-image:nth-child(2) { margin-top: 1rem !important; }
-            .hero-bg-image:nth-child(3) { margin-top: 1rem !important; }
-            .hero-bg-image:nth-child(4) { margin-top: 1rem !important; }
-
-            /* Adjust hero content for mobile */
-            .relative.z-10.text-center {
-                padding-top: 2rem !important;
-            }
-
-            /* Adjust text sizes for mobile */
-            .text-4xl.lg\:text-6xl {
-                font-size: 2.5rem !important;
-                line-height: 1.2 !important;
-            }
-
-            .text-lg.lg\:text-xl {
-                font-size: 1.125rem !important;
+            
+            /* CTA section - stack content vertically on mobile */
+            #cta-section .grid.grid-cols-1.lg\\:grid-cols-2 {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
             }
         }
         
@@ -601,48 +585,16 @@
             background-color: white !important;
             color: #111827 !important; /* Very dark text on white background */
         }
-        
-        /* Logo Animation Options */
-        @keyframes gentlePulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes subtleFloat {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-            100% { transform: translateY(0); }
-        }
-        
-        @keyframes softGlow {
-            0% { box-shadow: 0 0 0 rgba(165, 180, 252, 0); }
-            50% { box-shadow: 0 0 15px rgba(165, 180, 252, 0.5); }
-            100% { box-shadow: 0 0 0 rgba(165, 180, 252, 0); }
-        }
-        
-        /* Animation classes */
-        .logo-pulse {
-            animation: gentlePulse 2s ease-in-out infinite;
-        }
-        
-        .logo-float {
-            animation: subtleFloat 2s ease-in-out infinite;
-        }
-        
-        .logo-glow {
-            animation: softGlow 2s ease-in-out infinite;
-        }
     </style>
 </head>
-<body class="dark">
+<body class="bg-black text-white">
     <!-- Header/Navbar -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm" id="navbar">
         <nav class="flex items-center justify-between px-6 py-4 lg:px-8">
             <!-- Logo -->
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-brand-accent rounded-full logo-glow"></div>
-                <span class="text-xl font-medium text-white logo-float" id="logo-text">ImmiCoach</span>
+            <div class="flex items-center space-x-2 animate-on-scroll animate-delay-100">
+                <div class="w-8 h-8 bg-brand-accent rounded-full"></div>
+                <span class="text-xl font-medium text-white" id="logo-text">ImmiCare</span>
             </div>
             
             <!-- Navigation Menu -->
@@ -698,48 +650,34 @@
 </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
         <!-- Background decorative elements -->
         <div class="absolute inset-0 pointer-events-none">
             <!-- Left side mockup -->
-            <div class="hero-bg-image absolute -left-2 top-1/4 w-80 rounded-2xl overflow-hidden animate-on-scroll animate-delay-300 md:block hidden">
+            <div class="hero-bg-image absolute -left-2 top-1/4 w-80 rounded-2xl overflow-hidden animate-on-scroll animate-delay-300">
                 <img src="img/hero-4.png" 
                      alt="Case management" 
                      class="w-full h-full object-cover rounded-2xl opacity-80">
             </div>
             
             <!-- Right side mockups -->
-            <div class="hero-bg-image absolute -right-8 top-1/4 w-80 rounded-2xl overflow-hidden animate-on-scroll animate-delay-200 md:block hidden">
+            <div class="hero-bg-image absolute -right-8 top-1/4 w-80 rounded-2xl overflow-hidden animate-on-scroll animate-delay-200">
                 <img src="img/hero-1.png" 
                      alt="Analytics dashboard" 
                      class="w-full h-full object-cover rounded-2xl opacity-80">
             </div>
             
-            <div class="hero-bg-image absolute right-44 -bottom-16 w-80 rounded-2xl overflow-hidden animate-on-scroll animate-delay-400 md:block hidden">
+            <div class="hero-bg-image absolute right-44 -bottom-16 w-80 rounded-2xl overflow-hidden animate-on-scroll animate-delay-400">
                 <img src="img/hero-3.png" 
                      alt="Schedule calendar interface" 
                      class="w-full h-full object-cover rounded-2xl opacity-80">
             </div>
             
             <!-- Bottom stats cards -->
-            <div class="hero-bg-image absolute -bottom-16 left-44 w-96 rounded-xl overflow-hidden animate-on-scroll animate-delay-500 md:block hidden">
+            <div class="hero-bg-image absolute -bottom-16 left-44 w-96  rounded-xl overflow-hidden animate-on-scroll animate-delay-500">
                 <img src="img/hero-2.png" 
                      alt="Statistics dashboard" 
                      class="w-full h-full object-cover rounded-xl opacity-80">
-            </div>
-        </div>
-
-        <!-- Mobile Hero Images -->
-        <div class="md:hidden w-full px-4 space-y-4 mt-8">
-            <div class="hero-bg-image w-full max-w-[300px] mx-auto rounded-2xl overflow-hidden animate-on-scroll animate-delay-300">
-                <img src="img/hero-4.png" 
-                     alt="Case management" 
-                     class="w-full h-full object-cover rounded-2xl opacity-80">
-            </div>
-            <div class="hero-bg-image w-full max-w-[300px] mx-auto rounded-2xl overflow-hidden animate-on-scroll animate-delay-400">
-                <img src="img/hero-1.png" 
-                     alt="Analytics dashboard" 
-                     class="w-full h-full object-cover rounded-2xl opacity-80">
             </div>
         </div>
         
@@ -754,13 +692,13 @@
             </div>
             
             <!-- Main headline -->
-            <h1 class="text-3xl md:text-4xl lg:text-6xl font-medium mb-4 leading-tight animate-on-scroll animate-delay-200">
+            <h1 class="text-4xl lg:text-6xl font-medium mb-4 leading-tight animate-on-scroll animate-delay-200">
                 Immigration Compliance.<br>
                 <span class="text-gray-300">Made Simple.</span>
             </h1>
             
             <!-- Subtitle -->
-            <p class="text-base md:text-lg lg:text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed animate-on-scroll animate-delay-300">
+            <p class="text-lg lg:text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed animate-on-scroll animate-delay-300">
                 Everything your team needs to stay compliant, retain talent, and avoid costly mistakes.
             </p>
             
