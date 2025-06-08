@@ -39,6 +39,20 @@
             scroll-behavior: smooth;
         }
         
+        /* Logo floating animation */
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .logo-float {
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+        
         /* Custom subtle animation - only 10px movement */
         @keyframes subtleFadeInUp {
             from {
@@ -594,7 +608,7 @@
             <!-- Logo -->
             <div class="flex items-center space-x-2 animate-on-scroll animate-delay-100">
                 <div class="w-8 h-8 bg-brand-accent rounded-full"></div>
-                <span class="text-xl font-medium text-white" id="logo-text">ImmiCare</span>
+                <span class="text-xl font-medium text-white logo-float" id="logo-text">ImmiCare</span>
             </div>
             
             <!-- Navigation Menu -->
