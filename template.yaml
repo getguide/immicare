@@ -1,11 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
+Description: Immiwatch Express Entry Draw Checker - Monitors IRCC draws every 15 minutes
 
 Parameters:
   S3BucketName:
     Type: String
-    Description: Name of the existing S3 bucket to store updates
-    Default: immiwatch-lambda-tracker
+    Description: Name of the S3 bucket for storing draw data
   AirtableWebhookUrl:
     Type: String
     Description: Airtable webhook URL for notifications
@@ -15,20 +15,20 @@ Resources:
   DrawCheckerFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: immiwatch/src/functions/scraper/
+      CodeUri: src/functions/ee-draw-checker/
       Handler: lambda_function.lambda_handler
-      Runtime: python3.12
+      Runtime: python3.9
       Timeout: 30
       MemorySize: 128
       Environment:
         Variables:
+          S3_BUCKET: !Ref S3BucketName
           WEBHOOK_URL: !Ref AirtableWebhookUrl
-          S3_BUCKET_NAME: !Ref S3BucketName
       Policies:
         - S3CrudPolicy:
             BucketName: !Ref S3BucketName
       Events:
-        DrawCheckerSchedule:
+        Schedule:
           Type: Schedule
           Properties:
             Schedule: rate(15 minutes)
@@ -36,7 +36,7 @@ Resources:
 
 Outputs:
   DrawCheckerFunction:
-    Description: "Draw Checker Lambda Function ARN"
+    Description: "Express Entry Draw Checker Lambda Function ARN"
     Value: !GetAtt DrawCheckerFunction.Arn
   DrawCheckerFunctionRole:
     Description: "Implicit IAM Role created for the draw checker function"
