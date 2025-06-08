@@ -654,10 +654,8 @@
     </div>
 
     <!-- Book a call button with link -->
-    <a href="https://immi.care/book-call">
-        <button class="border border-gray-400 text-white px-6 py-2 rounded-full hover:border-white transition-colors" id="cta-button">
-            Book a call
-        </button>
+    <a href="https://immi.care/book-call" target="_blank" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-brand-primary hover:bg-brand-primary-dark rounded-lg transition-colors">
+        Get Started
     </a>
 </div>
 </nav>
@@ -723,13 +721,11 @@
             Start Now for $1/day
         </button>
     </a>
-    <a href="javascript:void(0)">
-        <button class="border border-gray-400 hover:border-white text-white px-8 py-3 rounded-full font-medium transition-colors flex items-center space-x-2">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M8 5v10l7-5-7-5z"/>
-            </svg>
-            <span>Watch Demo</span>
-        </button>
+    <a href="#video" class="border border-gray-400 hover:border-white text-white px-8 py-3 rounded-full font-medium transition-colors flex items-center space-x-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M8 5v10l7-5-7-5z"/>
+        </svg>
+        <span>Watch Demo</span>
     </a>
 </div>
 </div>
@@ -1616,7 +1612,7 @@
     const videoIframe = document.getElementById('video-iframe');
     
     // TODO: Replace with your actual video URL
-    const videoUrl = 'YOUR_VIDEO_URL_HERE';
+    const videoUrl = 'https://www.youtube.com/embed/kJ38f09hX1w?autoplay=1';
     
     videoTrigger.addEventListener('click', function() {
         videoModal.classList.remove('hidden');
