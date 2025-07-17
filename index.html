@@ -332,14 +332,14 @@
             color: #111827 !important; /* Very dark text on white background */
         }
         
-        .logo-light { display: block; }
-        .logo-dark { display: none; }
+        .logo-light { display: block !important; }
+        .logo-dark { display: none !important; }
         
-        .light .logo-light { display: block; }
-        .light .logo-dark { display: none; }
+        .light .logo-light { display: block !important; }
+        .light .logo-dark { display: none !important; }
         
-        .dark .logo-light { display: none; }
-        .dark .logo-dark { display: block; }
+        .dark .logo-light { display: none !important; }
+        .dark .logo-dark { display: block !important; }
         
 
     </style>
@@ -349,7 +349,7 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm" id="navbar">
         <nav class="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
             <!-- Logo -->
-            <div class="flex items-center space-x-2 animate-on-scroll animate-delay-100">
+            <div class="flex items-center animate-on-scroll animate-delay-100">
                 <img src="img/logo-full-accent-black.svg" alt="ImmiCare Logo" class="w-auto h-6 sm:h-8 object-contain logo-light">
                 <img src="img/logo-full-accent-white.svg" alt="ImmiCare Logo" class="w-auto h-6 sm:h-8 object-contain logo-dark">
             </div>
