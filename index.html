@@ -15,7 +15,7 @@
     <link rel="icon" type="image/svg+xml" href="img/logo-favicon-accent.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -23,10 +23,10 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        'sans': ['Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        'sans': ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
                     },
                     colors: {
-                        'brand-accent': '#A5B4FC', // indigo-300
+                        'brand-accent': '#33C2FF', // Exact logo blue (lighter)
                         'brand-text': '#020617', // slate-950
                     }
                 }
@@ -278,12 +278,12 @@
         
         /* Light theme button styles */
         .light .bg-brand-accent {
-            background-color: #A5B4FC !important; /* indigo-300 */
+            background-color: #33C2FF !important; /* Exact logo blue (lighter) */
             color: #020617 !important; /* slate-950 */
         }
         
         .light .bg-brand-accent:hover {
-            background-color: #818CF8 !important; /* indigo-400 */
+            background-color: #1F7AE5 !important; /* Exact logo blue (darker) */
             color: #020617 !important; /* slate-950 */
         }
         
@@ -503,12 +503,12 @@
         
         /* Global brand accent button styling - consistent across all themes */
         .bg-brand-accent {
-            background-color: #A5B4FC !important; /* indigo-300 */
+            background-color: #33C2FF !important; /* Exact logo blue (lighter) */
             color: #020617 !important; /* slate-950 */
         }
         
         .bg-brand-accent:hover {
-            background-color: #818CF8 !important; /* indigo-400 */
+            background-color: #1F7AE5 !important; /* Exact logo blue (darker) */
             color: #020617 !important; /* slate-950 */
         }
         
@@ -732,7 +732,7 @@
           <!-- CTA Buttons -->
 <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-on-scroll animate-delay-400">
     <a href="https://immi.care/early-access">
-        <button class="bg-brand-accent hover:bg-indigo-400 text-brand-text px-8 py-3 rounded-full font-medium transition-colors">
+        <button class="bg-brand-accent hover:bg-brand-accent text-brand-text px-8 py-3 rounded-full font-medium transition-colors">
             Get Started
         </button>
     </a>
@@ -850,8 +850,8 @@
             <!-- CTA Buttons -->
 <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-on-scroll animate-delay-600">
     <a href="https://immi.care/start-now">
-        <button class="bg-brand-accent hover:bg-indigo-400 text-brand-text px-8 py-3 rounded-full font-medium transition-colors">
-            Start Now
+                <button class="bg-brand-accent hover:bg-brand-accent text-brand-text px-8 py-3 rounded-full font-medium transition-colors">
+        Start Now
         </button>
     </a>
     <button onclick="document.getElementById('pricing').scrollIntoView({behavior: 'smooth'})" class="border border-gray-400 hover:border-white text-white px-8 py-3 rounded-full font-medium transition-colors">
@@ -1273,7 +1273,7 @@
                     
                     <!-- CTA Button -->
 <a href="https://immi.care/1dollar-deal">
-    <button class="w-full bg-brand-accent hover:bg-indigo-400 text-brand-text py-4 rounded-full font-medium transition-colors">
+    <button class="w-full bg-brand-accent hover:bg-brand-accent text-brand-text py-4 rounded-full font-medium transition-colors">
         Get Started
     </button>
 </a>
@@ -1341,7 +1341,7 @@
                     
                     <!-- CTA Button -->
 <a href="https://immi.care/6ske">
-    <button class="w-full bg-brand-accent hover:bg-indigo-400 text-brand-text py-4 rounded-full font-medium transition-colors">
+    <button class="w-full bg-brand-accent hover:bg-brand-accent text-brand-text py-4 rounded-full font-medium transition-colors">
         Request Full Support
     </button>
 </a>
@@ -1372,7 +1372,7 @@
                     
                     <!-- CTA Button -->
 <a href="https://immi.care/1dollar-deal">
-    <button class="bg-brand-accent hover:bg-indigo-400 text-brand-text px-8 py-4 rounded-full font-medium transition-colors">
+    <button class="bg-brand-accent hover:bg-brand-accent text-brand-text px-8 py-4 rounded-full font-medium transition-colors">
         Get Started
     </button>
 </a>
