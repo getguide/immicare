@@ -1,6 +1,6 @@
 {
   "name": "ImmiCare",
-  "short_name": "ImmiCare",
+  "short_name": "ImmiCare", 
   "description": "Immigration compliance made simple",
   "start_url": "/",
   "display": "standalone",
@@ -14,10 +14,15 @@
       "purpose": "any maskable"
     },
     {
-      "src": "img/logo-favicon-accent.svg",
+      "src": "img/logo-favicon-accent.svg", 
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    },
+    {
+      "src": "img/logo-favicon-accent.svg",
+      "sizes": "144x144", 
+      "type": "image/svg+xml"
     }
   ]
 } 
